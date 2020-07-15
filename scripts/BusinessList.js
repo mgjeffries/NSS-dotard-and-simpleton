@@ -3,24 +3,21 @@ import { useBusinesses } from './BusinessProvider.js'
 import { filterBusinessNY } from './BuisnessFilter.js'
 import { filterBusinessManufacturing } from './BuisnessFilter.js'
 
-export const listNYBusinesses = () => { 
-  const contentTarget = document.querySelector(".ny-list")
-
-  const allBuisnessesArray = useBusinesses()
-  const nyBusinesses = filterBusinessNY(allBuisnessesArray)
-
-  nyBusinesses.forEach(business => {
-    contentTarget.innerHTML += businessHTMLCreator(business)
-  });
+export const listNYBusinesses = () => {
+  domModifier(".ny-list", filterBusinessNY)
 }
 
 export const listManufacturingBuisnesses = () => {
-  const contentTarget = document.querySelector(".manufacturing-list")
+  domModifier(".manufacturing-list", filterBusinessManufacturing)
+}
+
+const domModifier = (target, filter) => {
+  const contentTarget = document.querySelector(target)
 
   const allBuisnessesArray = useBusinesses()
-  const manufacturingBuisnesses = filterBusinessManufacturing(allBuisnessesArray)
+  const filteredBuisness = filter(allBuisnessesArray)
 
-  manufacturingBuisnesses.forEach(business => {
+  filteredBuisness.forEach(business => {
     contentTarget.innerHTML += businessHTMLCreator(business)
   });
 }
