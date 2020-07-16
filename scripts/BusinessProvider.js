@@ -113,3 +113,13 @@ const businesses = [
 export const useBusinesses = () => {
   return businesses.slice()
 }
+
+export const usePurchasingAgents = () => {
+  return businesses.map(buisnessObj => {
+    return {
+      fullName: `${buisnessObj.purchasingAgent.nameFirst} ${buisnessObj.purchasingAgent.nameLast}`,
+      companyName: buisnessObj.companyName,
+      phoneWork: buisnessObj.phoneWork
+    }
+  })
+}
