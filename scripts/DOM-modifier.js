@@ -1,27 +1,27 @@
 import { businessHTMLCreator } from './Business.js'
 import { purchasingAgentHTMLCreator } from './PurchasingAgent.js'
-import { useBusinesses } from './BusinessProvider.js'
-import { usePurchasingAgents } from './BusinessProvider.js'
-import { filterBusinessNY } from './BuisnessFilter.js'
-import { filterBusinessManufacturing } from './BuisnessFilter.js'
+import { useBusinesses, findBusinesses, usePurchasingAgents } from './BusinessProvider.js'
+import { filterBusinessNY, filterBusinessManufacturing } from './BuisnessFilter.js'
+
+
 
 
 export const listNYBusinesses = () => {
-  domModifier(".ny-list", useBusinesses, filterBusinessNY, businessHTMLCreator)
+  domModifier(".ny-list", useBusinesses(), filterBusinessNY, businessHTMLCreator)
 }
 
 export const listManufacturingBuisnesses = () => {
-  domModifier(".manufacturing-list", useBusinesses, filterBusinessManufacturing, businessHTMLCreator)
+  domModifier(".manufacturing-list", useBusinesses(), filterBusinessManufacturing, businessHTMLCreator)
 }
 
 export const listPurchasingAgents = () => {
-  domModifier(".purchasing-agents", usePurchasingAgents, noFilter, purchasingAgentHTMLCreator)
+  domModifier(".purchasing-agents", usePurchasingAgents(), noFilter, purchasingAgentHTMLCreator)
 }
 
 const domModifier = (target, data, filter, htmlCreator) => {
   const contentTarget = document.querySelector(target)
 
-  const allBuisnessesArray = data()
+  const allBuisnessesArray = data
   const filteredBuisness = filter(allBuisnessesArray)
 
   filteredBuisness.forEach(business => {
@@ -30,3 +30,14 @@ const domModifier = (target, data, filter, htmlCreator) => {
 }
 
 const noFilter = (obj) => obj
+
+
+const companySearchForm = document.querySelector("#company-search")
+
+companySearchForm.addEventListener("keypress", keyPressEvent => {
+  if (keyPressEvent.charCode === 13) {
+    const searchResultData = findBusinesses(keyPressEvent.target.value)
+    console.log(searchResultData)
+    domModifier(".found-companies", searchResultData, noFilter, businessHTMLCreator)
+  }
+})

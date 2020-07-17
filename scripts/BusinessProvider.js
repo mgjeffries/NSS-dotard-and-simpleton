@@ -123,3 +123,7 @@ export const usePurchasingAgents = () => {
     }
   })
 }
+
+export const findBusinesses = (searchCriteria) => {
+  return businesses.filter(business => business.companyName.includes(searchCriteria))
+}
