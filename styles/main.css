@@ -1,7 +1,16 @@
 body {
-  margin: 0;
+  margin: 10px;
 }
+
 
 .card {
   border-bottom: solid black 2px;
+}
+
+.purchaing-agent {
+  background-color: aliceblue;
+}
+
+.business {
+  background-color: blanchedalmond;
 }
