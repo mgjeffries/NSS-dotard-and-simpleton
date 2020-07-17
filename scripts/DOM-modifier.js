@@ -1,6 +1,6 @@
 import { businessHTMLCreator } from './Business.js'
 import { purchasingAgentHTMLCreator } from './PurchasingAgent.js'
-import { useBusinesses, findBusinesses, usePurchasingAgents } from './BusinessProvider.js'
+import { useBusinesses, findBusinesses, findPurchasingAgents, usePurchasingAgents } from './BusinessProvider.js'
 import { filterBusinessNY, filterBusinessManufacturing } from './BuisnessFilter.js'
 
 export const listNYBusinesses = () => {
@@ -26,6 +26,20 @@ companySearchForm.addEventListener("keypress", keyPressEvent => {
     document.querySelector(".found-companies").innerHTML = ""
 
     domModifier(".found-companies", searchResultData, noFilter, businessHTMLCreator)
+  }
+})
+
+const agentSearchForm = document.querySelector("#purchasing-agent-search")
+
+agentSearchForm.addEventListener("keypress", keyPressEvent => {
+  if (keyPressEvent.charCode === 13) {
+    const searchResultData = findPurchasingAgents(keyPressEvent.target.value)
+    console.log(searchResultData)
+    
+    // Clear out any previous search results
+    document.querySelector(".found-purchasing-agents").innerHTML = ""
+
+    domModifier(".found-purchasing-agents", searchResultData, noFilter, purchasingAgentHTMLCreator)
   }
 })
 
