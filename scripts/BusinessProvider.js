@@ -129,9 +129,6 @@ export const findBusinesses = (searchCriteria) => {
 }
 
 export const findPurchasingAgents = (searchCriteria) => {
-  return businesses.filter(business => isPurchasingAgent(business, searchCriteria))
-}
-
-const isPurchasingAgent = (buisnesObj, searchCriteria) => {
-  return buisnesObj.purchasingAgent.nameFirst.includes(searchCriteria) || buisnesObj.purchasingAgent.nameLast.includes(searchCriteria)
+  const purchasingAgents = usePurchasingAgents()
+  return purchasingAgents.filter(agent => agent.fullName.includes(searchCriteria))
 }
