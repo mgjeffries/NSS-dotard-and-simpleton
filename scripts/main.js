@@ -1,7 +1,3 @@
-import { listNYBusinesses } from './DOM-modifier.js'
-import { listManufacturingBuisnesses } from './DOM-modifier.js'
-import { listPurchasingAgents } from './DOM-modifier.js'
+import { startListeners } from './eventListeners.js'
 
-listNYBusinesses()
-listManufacturingBuisnesses()
-listPurchasingAgents()
+startListeners()
